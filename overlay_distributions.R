@@ -19,14 +19,14 @@ read_and_prepare_data <- function(file_paths) {
   
   # Loop over each file path and read the data
   for (i in 1:length(file_paths)) {
-    # Read the CSV file
+   
     data <- read_csv(file_paths[i])
     
     # Add an additional column indicating the source of the data
     data <- data %>%
       mutate(Source = paste0("File_", i))  # Customize the name as needed
     
-    # Append the data to the list
+    
     all_data[[i]] <- data
   }
   
@@ -37,15 +37,14 @@ read_and_prepare_data <- function(file_paths) {
 }
 
 # Example usage
-# Specify the paths to the CSV files
-setwd('D:/Work Folder/PostDoc/Github Codes')
+
+setwd('directory') # Specify the paths to the CSV files
 file_paths <- c("file1.csv", "file2.csv", "file3.csv")  # Replace with your actual file paths
 
-# Read and prepare the data
 combined_data <- read_and_prepare_data(file_paths)
 
-# Plot and overlay the distributions using ggplot2
-# Assuming the variable of interest is in a column named 'Value'
+# Plot
+
 ggplot(combined_data, aes(x = Value, fill = Source)) +
   geom_density(alpha = 0.5) +  # Adjust transparency with alpha
   labs(
